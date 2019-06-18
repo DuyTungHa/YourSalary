@@ -17,7 +17,7 @@ class SessionForm extends React.Component {
         return (
             <div className={className}>
                 <label>{label}</label>
-                <input {...input}/>
+                <textarea rows="2" {...input}/>
                 {this.renderError(meta)}
             </div>
         )

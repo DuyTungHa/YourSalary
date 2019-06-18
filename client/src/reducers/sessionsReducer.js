@@ -18,7 +18,7 @@ export default (state = {}, action) => {
         case EDIT_SESSION:
             return {...state, [action.payload._id]: action.payload};
         case DELETE_SESSION:
-            return _.omit(state, action.payload._id);
+            return _.omit(state, action.payload);
         default:
             return state;
     }

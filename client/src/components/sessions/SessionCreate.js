@@ -10,7 +10,7 @@ class SessionCreate extends React.Component {
 
     render(){
         return (
-            <div style={{marginTop: 80}}>
+            <div>
                 <h3>New Session</h3>
                 <SessionForm onSubmit={this.onSubmit}/>
             </div>

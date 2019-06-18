@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {signIn, signOut} from './actions';
+import {signIn, signOut} from '../actions';
 
 class GoogleAuth extends React.Component {
     componentDidMount() {
@@ -37,23 +38,35 @@ class GoogleAuth extends React.Component {
             return null;
         } else if (this.props.isSignedIn) {
             return (
-                <button onClick={this.onSignOutClick} className="ui red google button">
-                    <i className="google icon"/>
-                        Sign Out
-                </button>
+                <>
+                    <Link to="/" className="item">
+                            Profile
+                    </Link>
+                    <div className="item">
+                        <button onClick={this.onSignOutClick} className="ui red google button">
+                            <i className="google icon"/>
+                                Sign Out
+                        </button>
+                    </div>
+                </>
             )
         } else {
             return (
-                <button onClick={this.onSignInClick} className="ui red google button">
-                    <i className="google icon"/>
-                    Sign In with Google
-                </button>
+                <div className="item">
+                    <button onClick={this.onSignInClick} className="ui red google button">
+                        <i className="google icon"/>
+                        Sign In with Google
+                    </button>
+                </div>
             );
         }
     }
 
     render() {
-        return <div className="item">{this.renderAuthButton()}</div>
+        return (
+            <>
+                {this.renderAuthButton()}
+            </>);
     }
 }
 

@@ -6,6 +6,7 @@ import SessionEdit from './sessions/SessionEdit';
 import SessionDelete from './sessions/SessionDelete';
 import SessionCreate from './sessions/SessionCreate';
 import Header from './Header';
+import NotFound from './NotFound';
 
 class App extends React.Component {
     render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
                             <Route path="/sessions/new" exact component={SessionCreate}/>
                             <Route path="/sessions/edit/:id" exact component={SessionEdit}/>
                             <Route path="/sessions/delete/:id" exact component={SessionDelete}/>
+                            <Route component={NotFound}/>
                         </Switch>
                     </div>
                 </Router>
