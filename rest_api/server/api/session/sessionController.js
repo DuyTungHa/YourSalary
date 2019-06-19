@@ -68,3 +68,25 @@ exports.delete = function(req, res, next) {
         }
     });
 };
+
+exports.addSum = function(req, res, next) {
+    var user = req.user;
+    user.sumSalary += req.session.salary;
+    user.save(function(err, saved) {
+        if(err)
+            next(err);
+        else 
+            res.json(saved.toJson());
+    });
+}
+
+exports.subtractSum = function(req, res, next) {
+    var user = req.user;
+    user.sumSalary = user.sumSalary < req.session.salary ? 0 : user.sumSalary - req.session.salary;
+    user.save(function(err, saved) {
+        if(err)
+            next(err);
+        else 
+            res.json(saved.toJson());
+    });
+}

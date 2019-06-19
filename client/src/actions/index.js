@@ -1,6 +1,16 @@
 import yoursalary from '../apis/yoursalary';
 import history from '../history';
-import {SIGN_IN, SIGN_OUT, CREATE_SESSION, FETCH_SESSIONS, FETCH_SESSION, EDIT_SESSION, DELETE_SESSION} from './types';
+import {
+    SIGN_IN, 
+    SIGN_OUT, 
+    CREATE_SESSION, 
+    FETCH_SESSIONS, 
+    FETCH_SESSION, 
+    EDIT_SESSION, 
+    DELETE_SESSION,
+    FETCH_PROFILE,
+    EDIT_PROFILE
+} from './types';
 
 export const signIn = (userId) => {
     return async (dispatch) => {
@@ -55,8 +65,25 @@ export const deleteSession = (id) => async (dispatch, getState) => {
     const {userId} = getState().auth;
     const config = { headers: {'Authorization': 'bearer ' + userId}};
     const response = await yoursalary.delete(`/sessions/${id}`, config);
-    if(response.status === 200){
-        dispatch({type: DELETE_SESSION, payload: id});
-        history.push('/');
-    }
+    dispatch({type: DELETE_SESSION, payload: response.data._id});
+    history.push('/');
+}
+
+export const fetchProfile = () => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+    const config = { headers: {'Authorization': 'bearer ' + userId}};
+    const response = await yoursalary.get('/users/me', config);
+    dispatch({type: FETCH_PROFILE, payload: response.data});
+}
+
+export const fetchProfileGoogle = (userGoogle) => {
+    return {type: FETCH_PROFILE, payload: userGoogle};
+}
+
+export const editProfile = (formValues) => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+    const config = { headers: {'Authorization': 'bearer ' + userId}};
+    const response = await yoursalary.put('/users', formValues, config);
+    dispatch({type: EDIT_PROFILE, payload: response.data});
+    history.push('/');
 }

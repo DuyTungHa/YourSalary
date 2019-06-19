@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {fetchSessions} from '../../actions';
+import About from '../utils/About';
 
 class SessionList extends React.Component {
     componentDidMount() {
@@ -53,7 +54,7 @@ class SessionList extends React.Component {
 
     render() {
         if(!this.props.currentUserId)
-            return <div>Please Sign-In First</div>;
+            return <About/>;
         else
             return (
                 <div>

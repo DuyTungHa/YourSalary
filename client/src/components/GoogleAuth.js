@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {signIn, signOut} from '../actions';
+import {signIn, signOut, fetchProfileGoogle} from '../actions';
+import history from '../history';
 
 class GoogleAuth extends React.Component {
     componentDidMount() {
@@ -19,7 +20,13 @@ class GoogleAuth extends React.Component {
 
     onAuthChange = (isSignedIn) => {
         if(isSignedIn){
-            this.props.signIn(this.auth.currentUser.get().getId());
+            const googleUser = this.auth.currentUser.get().getBasicProfile();
+            this.props.signIn(googleUser.getId());
+            this.props.fetchProfileGoogle({
+                name: googleUser.getName(),
+                email: googleUser.getEmail(),
+                image: googleUser.getImageUrl()
+            });
         } else {
             this.props.signOut();
         }
@@ -31,6 +38,7 @@ class GoogleAuth extends React.Component {
 
     onSignOutClick = () => {
         this.auth.signOut();
+        history.push('/');
     }
 
     renderAuthButton(){
@@ -39,7 +47,7 @@ class GoogleAuth extends React.Component {
         } else if (this.props.isSignedIn) {
             return (
                 <>
-                    <Link to="/" className="item">
+                    <Link to='/profile' className="item">
                             Profile
                     </Link>
                     <div className="item">
@@ -76,4 +84,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps, {signIn, signOut})(GoogleAuth);
+export default connect(mapStateToProps, {signIn, signOut, fetchProfileGoogle})(GoogleAuth);

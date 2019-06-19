@@ -12,12 +12,12 @@ class SessionForm extends React.Component {
         }
     }
 
-    renderInput = ({input, label, meta}) => {
-        const className = `field ${meta.error && meta.touched ? 'error': ''}`
+    renderInput = ({input, label, meta, rows}) => {
+        const className = `field ${meta.error && meta.touched ? 'error': ''}`;
         return (
             <div className={className}>
                 <label>{label}</label>
-                <textarea rows="2" {...input}/>
+                <textarea rows={rows} {...input}/>
                 {this.renderError(meta)}
             </div>
         )
@@ -30,9 +30,9 @@ class SessionForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error">
-                <Field name="title" component={this.renderInput} label="Title"/>
-                <Field name="description" component={this.renderInput} label="Description"/>
-                <Field name="salary" component={this.renderInput} label="Salary"/>
+                <Field name="title" component={this.renderInput} label="Title" rows={1}/>
+                <Field name="description" component={this.renderInput} label="Description" rows={2}/>
+                <Field name="salary" component={this.renderInput} label="Salary" rows={1}/>
                 <button className="ui button primary">Submit</button>
             </form>
         );
@@ -47,9 +47,12 @@ const validate = formValues => {
     if(!formValues.description) {
         errors.description='You must provide a description';
     }
-    if(isNaN(formValues.salary)) {
-        errors.salary='Salary must be a number';
+    if(!formValues.salary) {
+        errors.salary='You must provide a salary';
     }
+    if(isNaN(formValues.salary) || formValues.salary < 0) {
+        errors.salary='Salary must be a positive number';  
+    }  
     return errors;
 }
 

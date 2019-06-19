@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchSession, editSession} from '../../actions';
 import SessionForm from './SessionForm';
-import Loader from '../Loader';
+import Loader from '../utils/Loader';
 
 class SessionEdit extends React.Component {
     componentDidMount() {

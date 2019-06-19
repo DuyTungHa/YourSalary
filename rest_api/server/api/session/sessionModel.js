@@ -13,6 +13,7 @@ var SessionSchema = new Schema({
     salary: {
         type: Number,
         required: true,
+        min: 0,
         default: 0
     }, 
     freelancer: {type: Schema.Types.ObjectId, ref: 'user'}
