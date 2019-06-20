@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from '../utils/Model';
+import Loader from '../utils/Loader';
 import history from '../../history';
 import {fetchSession, deleteSession} from '../../actions';
 
@@ -12,6 +13,8 @@ class SessionDelete extends React.Component{
     }
 
     componentDidUpdate(prevProps) {
+        if(this.props.isSignedIn === false)
+            history.push('/error');
         if(!prevProps.currentUserId && this.props.currentUserId){
             this.props.fetchSession(this.props.match.params.id);
         }
@@ -35,6 +38,8 @@ class SessionDelete extends React.Component{
     }
 
     render(){
+        if(!this.props.currentUserId)
+            return <Loader/>;
         return (
             <>
                 <Modal
@@ -50,6 +55,7 @@ class SessionDelete extends React.Component{
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        isSignedIn: state.auth.isSignedIn,
         currentUserId: state.auth.userId,
         session: state.sessions[ownProps.match.params.id]
     };

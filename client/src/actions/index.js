@@ -9,7 +9,10 @@ import {
     EDIT_SESSION, 
     DELETE_SESSION,
     FETCH_PROFILE,
-    EDIT_PROFILE
+    EDIT_PROFILE,
+    ADD_SALARY,
+    SUBT_SALARY,
+    RESET_SALARY
 } from './types';
 
 export const signIn = (userId) => {
@@ -72,8 +75,12 @@ export const deleteSession = (id) => async (dispatch, getState) => {
 export const fetchProfile = () => async (dispatch, getState) => {
     const {userId} = getState().auth;
     const config = { headers: {'Authorization': 'bearer ' + userId}};
-    const response = await yoursalary.get('/users/me', config);
-    dispatch({type: FETCH_PROFILE, payload: response.data});
+    try{
+        const response = await yoursalary.get('/users/me', config);
+        dispatch({type: FETCH_PROFILE, payload: response.data});
+    } catch(e) {
+        history.push('/error');
+    }
 }
 
 export const fetchProfileGoogle = (userGoogle) => {
@@ -85,5 +92,27 @@ export const editProfile = (formValues) => async (dispatch, getState) => {
     const config = { headers: {'Authorization': 'bearer ' + userId}};
     const response = await yoursalary.put('/users', formValues, config);
     dispatch({type: EDIT_PROFILE, payload: response.data});
+    history.push('/');
+}
+
+export const addSalary = (id) => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+    const config = { headers: {'Authorization': 'bearer ' + userId}};
+    const response = await yoursalary.post(`/sessions/addSalary/${id}`, null, config);
+    dispatch({type: ADD_SALARY, payload: response.data});
+}
+
+export const subtSalary = (id) => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+    const config = { headers: {'Authorization': 'bearer ' + userId}};
+    const response = await yoursalary.post(`/sessions/subtSalary/${id}`, null, config);
+    dispatch({type: SUBT_SALARY, payload: response.data});
+}
+
+export const resetSalary = () => async (dispatch, getState) => {
+    const {userId} = getState().auth;
+    const config = { headers: {'Authorization': 'bearer ' + userId}};
+    const response = await yoursalary.post('/users/reset', {}, config);
+    dispatch({type: RESET_SALARY, payload: response.data});
     history.push('/');
 }

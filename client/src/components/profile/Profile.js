@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ProfileForm from './ProfileForm';
 import Loader from '../utils/Loader';
 import {fetchProfile, editProfile} from '../../actions';
+import history from '../../history';
 
 class Profile extends React.Component{
     componentDidMount() {
@@ -12,6 +13,8 @@ class Profile extends React.Component{
     }
 
     componentDidUpdate(prevProps) {
+        if(this.props.isSignedIn === false)
+            history.push('/error');
         if(!prevProps.currentUserId && this.props.currentUserId){
             this.props.fetchProfile(this.props.location.state);
         }
@@ -57,6 +60,7 @@ class Profile extends React.Component{
 
 const maptStateToProps = (state) => {
     return {
+        isSignedIn: state.auth.isSignedIn,
         currentUserId: state.auth.userId,
         profile: state.profile
     };

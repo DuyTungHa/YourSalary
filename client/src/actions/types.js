@@ -7,3 +7,6 @@ export const DELETE_SESSION = 'DELETE_SESSION';
 export const EDIT_SESSION = 'EDIT_SESSION';
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const ADD_SALARY = 'ADD_SALARY';
+export const SUBT_SALARY = 'SUBT_SALARY';
+export const RESET_SALARY = 'RESET_SALARY';

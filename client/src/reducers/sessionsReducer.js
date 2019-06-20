@@ -4,7 +4,8 @@ import {
     FETCH_SESSIONS,
     CREATE_SESSION,
     EDIT_SESSION,
-    DELETE_SESSION
+    DELETE_SESSION,
+    SIGN_OUT
 } from '../actions/types';
 
 export default (state = {}, action) => {
@@ -19,6 +20,8 @@ export default (state = {}, action) => {
             return {...state, [action.payload._id]: action.payload};
         case DELETE_SESSION:
             return _.omit(state, action.payload);
+        case SIGN_OUT:
+            return {};
         default:
             return state;
     }

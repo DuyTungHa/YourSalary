@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {fetchSession, editSession} from '../../actions';
 import SessionForm from './SessionForm';
 import Loader from '../utils/Loader';
+import history from '../../history';
 
 class SessionEdit extends React.Component {
     componentDidMount() {
@@ -13,6 +14,8 @@ class SessionEdit extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        if(this.props.isSignedIn === false)
+            history.push('/error');
         if(!prevProps.currentUserId && this.props.currentUserId){
             this.props.fetchSession(this.props.match.params.id);
         }
@@ -46,6 +49,7 @@ class SessionEdit extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        isSignedIn: state.auth.isSignedIn,
         currentUserId: state.auth.userId,
         session: state.sessions[ownProps.match.params.id]
     };

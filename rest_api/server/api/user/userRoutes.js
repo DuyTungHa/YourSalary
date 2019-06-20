@@ -5,7 +5,7 @@ var controller = require('./userController');
 var checkUser = [auth.decodeToken(), auth.getFreshUser()];
 
 router.post('/signin', verifyUser(), controller.signin);
-router.post('/reset', verifyUser, controller.resetSalary);
+router.post('/reset', checkUser, controller.resetSalary);
 router.get('/me', checkUser, controller.me);
 router.put('/', checkUser, controller.put);
 
