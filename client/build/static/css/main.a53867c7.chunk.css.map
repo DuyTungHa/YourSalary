@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,cACI,YAAa,CACb,gBAAiB,CACjB,qBAAsB,CACtB,6BACJ","file":"main.a53867c7.chunk.css","sourcesContent":[".flex-wrapper {\r\n    display: flex;\r\n    min-height: 100vh;\r\n    flex-direction: column;\r\n    justify-content: space-between\r\n}"]}
