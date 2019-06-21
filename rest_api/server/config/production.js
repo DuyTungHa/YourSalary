@@ -1,4 +1,7 @@
 module.exports = {
     // disable logging for production
-    logging: false
+    logging: false,
+    db: {
+        url: process.env.MONGODB_URI
+    }
 };
