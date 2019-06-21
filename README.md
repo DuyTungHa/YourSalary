@@ -1,2 +1,2 @@
-# YourSalary
-Salary calculator for freelancers
+# YourSalary - Backend
+Backend repository for deployment - YourSalary Project
