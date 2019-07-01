@@ -32,7 +32,6 @@ exports.getFreshUser = function() {
 exports.verifyUser = function() {
     return function(req, res, next) {
       var googleId = req.body.googleId;
-  
       if (!googleId) {
         res.status(400).send('You need a google Id');
         return;

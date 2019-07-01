@@ -39,7 +39,7 @@ class SessionEdit extends React.Component {
                 </Link>
                 <h3>Edit Your Session</h3>
                 <SessionForm
-                    initialValues={_.pick(this.props.session, 'title', 'description', 'salary')}
+                    initialValues={_.pick(this.props.session, 'title', 'description', 'salary', 'startDate', 'endDate')}
                     onSubmit={this.onSubmit}
                 />
             </div>

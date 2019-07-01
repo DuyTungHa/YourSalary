@@ -16,6 +16,14 @@ var SessionSchema = new Schema({
         min: 0,
         default: 0
     }, 
+    startDate: {
+        type: String,
+        required: true
+    },
+    endDate: {
+        type: String,
+        required: true
+    },
     freelancer: {type: Schema.Types.ObjectId, ref: 'user'}
 });
 

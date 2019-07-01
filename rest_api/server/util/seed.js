@@ -11,9 +11,9 @@ var users = [
 ];
 
 var sessions = [
-  {title: 'HomeClass', description: 'Class online at homeclass website', salary: 150000},
-  {title: 'Minh and Huy', description: 'Address: 189 Giang Vo', salary: 200000},
-  {title: 'Work from home', description: 'Teaching English from home', salary: 300000}
+  {title: 'HomeClass', description: 'Class online at homeclass website', salary: 150000, startDate: new Date(2019, 6, 26, 15, 15), endDate: new Date(2019, 6, 26, 16, 15)},
+  {title: 'Minh and Huy', description: 'Address: 189 Giang Vo', salary: 200000, startDate: new Date(2019, 6, 26, 15, 15), endDate: new Date(2019, 6, 26, 16, 15)},
+  {title: 'Work from home', description: 'Teaching English from home', salary: 300000, startDate: new Date(2019, 6, 26, 15, 15), endDate: new Date(2019, 6, 26, 16, 15)}
 ];
 
 var createDoc = function(model, doc) {
